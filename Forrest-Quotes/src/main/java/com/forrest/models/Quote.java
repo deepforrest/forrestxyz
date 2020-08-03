@@ -1,10 +1,13 @@
 package com.forrest.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,17 +19,17 @@ public class Quote {
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="author")
-	private String author;
-	
 	@Column(name="quotation")
 	private String quotation;
 	
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
+					CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="author_id")
+	private Author author;
+	
 	public Quote() {}
 
-	public Quote(String author, String quotation) {
-		super();
-		this.author = author;
+	public Quote(String quotation) {
 		this.quotation = quotation;
 	}
 
@@ -38,14 +41,6 @@ public class Quote {
 		this.id = id;
 	}
 
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
 	public String getQuotation() {
 		return quotation;
 	}
@@ -54,10 +49,21 @@ public class Quote {
 		this.quotation = quotation;
 	}
 
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
 	@Override
 	public String toString() {
-		return "Quote [id=" + id + ", author=" + author + ", quotation=" + quotation + "]";
+		return "Quote [id=" + id + ", quotation=" + quotation + "]";
 	}
+
+	
+	
 	
 	
 }

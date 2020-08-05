@@ -6,4 +6,5 @@ import com.forrest.models.Author;
 
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
 
+	public Author findByName(String name);
 }

@@ -63,7 +63,15 @@ public class Author {
 	public void setWiki(String wiki) {
 		this.wiki = wiki;
 	}
-	
+
+	public List<Quote> getQuotes() {
+		return quotes;
+	}
+
+	public void setQuotes(List<Quote> quotes) {
+		this.quotes = quotes;
+	}
+
 	public void addQuote(Quote quote) {
 		if(quotes == null) {
 			quotes = new ArrayList<>();

@@ -31,9 +31,15 @@ public class QuoteController {
 	}
 	
 	@GetMapping("/quotes")
-	public List<Quote> getAllQuotes() {
+	public List<String> getAllQuotes() {
 		try {
-			return repo.findAll();
+			List<Quote> quotes = repo.findAll();
+			System.out.println("Found: " + quotes.size() + " Quotes");
+			List<String> quotations = new ArrayList();
+			for(Quote quote : quotes) {
+				quotations.add(quote.getQuotation());
+			}
+			return quotations;
 		}catch(Exception e){
 			return new ArrayList<>();
 		}
@@ -75,6 +81,7 @@ public class QuoteController {
 			repo.save(quote);
 			return "Success";
 		}catch(Exception e) {
+			e.printStackTrace();
 			return "Failed";
 		}
 	}
